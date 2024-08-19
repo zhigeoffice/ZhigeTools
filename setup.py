@@ -11,7 +11,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zhige_tools',
-    version='0.1.0',
+    version='0.1.1',
     packages=find_packages(include=['zhige_tools', 'zhige_tools.*']),
     install_requires=[
         # 在这里列出你的依赖包
