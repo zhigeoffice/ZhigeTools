@@ -31,7 +31,16 @@ def _get_alphabet(base, custom_alphabet=None):
     return alphabet
 
 
-def number_to_base(number, base=16, custom_alphabet=None):
+def number_to_base(number, base=16, custom_alphabet=None) -> str:
+    """
+    Convert a number to a string in a given base(将数字转换为指定进制的字符串).
+    Args:
+        number (int): The number to convert(需要转换的数字).
+        base (int): The base to use for the conversion(进制).
+        custom_alphabet (str): A custom alphabet to use for the conversion(自定义字符集).
+    Returns:
+        str: The string representation of the number in the given base(指定进制的数字字符串表示).
+    """
     if type(number) is not int:
         raise TypeError("number must be an integer")
     if base < 2:
@@ -61,7 +70,16 @@ def number_to_base(number, base=16, custom_alphabet=None):
     return '-' + result if is_negative else result
 
 
-def base_to_number(encoded_str, base=16, custom_alphabet=None):
+def base_to_number(encoded_str: str, base: int=16, custom_alphabet: str=None) -> int:
+    """
+    Convert a string in a given base to an integer(将给定的字符串从给定的进制转换为整数值).
+    Args:
+        encoded_str (str): The string to convert(需要转换的字符串).
+        base (int): The base of the string(字符串的进制).
+        custom_alphabet (str): A custom alphabet to use for the conversion(自定义字符集).
+    Returns:
+        int: The integer value of the string(字符串对应的整数值).
+    """
     # 使用Python内置的转换函数对于常见进制进行优化
     if not encoded_str.startswith('-'):
         if base == 16:

@@ -23,8 +23,13 @@ setup(
     author='Zhige office',
     author_email='zhigeoffice@gmail.com',
     description='zhige office的个人工具箱',
-    long_description=open('README.md').read(),
+    long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
-    url='你的项目网址',
+    url='https://github.com/zhigeoffice/ZhigeTools/',
     license='MIT',  # 或者其他适合你的许可证
+    classifiers=[
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3',
+    ],
+    python_requires='>=3.6',
 )
