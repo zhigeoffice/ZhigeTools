@@ -7,26 +7,32 @@
 @Email   : zhigeoffice@gmail.com
 @Software: PyCharm
 """
-
 import string
+
+__base64_alphabet = string.digits + string.ascii_lowercase + string.ascii_uppercase + '+/'
 
 
 def _get_alphabet(base, custom_alphabet=None):
     """Helper function to get the alphabet based on base or custom alphabet."""
-    base64_alphabet = string.digits + string.ascii_lowercase + string.ascii_uppercase + '+/'
 
     if custom_alphabet:
         if len(custom_alphabet) != base:
-            raise ValueError(f"custom_alphabet length must be equal to base: {base}")
+            raise ValueError(
+                f"The length of custom_alphabet must be equal to the base: {base}, but got {len(custom_alphabet)}"
+            )
+        if ' ' in custom_alphabet:
+            raise ValueError("custom_alphabet cannot contain spaces. Please remove any spaces and try again.")
+        if '-' in custom_alphabet:
+            raise ValueError("custom_alphabet cannot contain hyphens (-). Please remove any hyphens and try again.")
         alphabet = custom_alphabet
     else:
-        if base <= 64:
-            alphabet = base64_alphabet[:base]
+        if 64 >= base >= 2:
+            alphabet = __base64_alphabet[:base]
         else:
-            raise ValueError(f"Unsupported base: {base}. Supported bases are 2, 8, 10, 16, 24, 36, 62, 64.")
-
-    if ' ' in alphabet:
-        raise ValueError("custom_alphabet cannot contain spaces")
+            raise ValueError(
+                f"Unsupported base: {base}. The supported base range is from 2 to 64. Please choose a base within "
+                "this range or provide a custom_alphabet of the corresponding length."
+            )
 
     return alphabet
 
@@ -70,7 +76,7 @@ def number_to_base(number, base=16, custom_alphabet=None) -> str:
     return '-' + result if is_negative else result
 
 
-def base_to_number(encoded_str: str, base: int=16, custom_alphabet: str=None) -> int:
+def base_to_number(encoded_str: str, base: int = 16, custom_alphabet: str = None) -> int:
     """
     Convert a string in a given base to an integer(将给定的字符串从给定的进制转换为整数值).
     Args:
@@ -110,3 +116,7 @@ def base_to_number(encoded_str: str, base: int=16, custom_alphabet: str=None) ->
         number = number * base + value
 
     return -number if is_negative else number
+
+
+if __name__ == '__main__':
+    print(number_to_base(123456789, 16, 'ABCDEFGHIJKLMNOP'))
